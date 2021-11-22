@@ -236,7 +236,7 @@ systemctl enable dhcpcd.service
 
 if ! test -z "${ARCH_KEYMAP}";
 then
-  echo "KEYMAP=${ARCH_KEYMAP}" > /mnt/etc/vconsole.conf
+  echo "KEYMAP=${ARCH_KEYMAP}" > /etc/vconsole.conf
 fi
 
 while true;
