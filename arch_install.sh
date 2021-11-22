@@ -165,7 +165,7 @@ fi
 printf -- "[!] cgdisk will start in a few seconds, please create the following layout:\n"
 printf -- "      size in sectors: +100MB, hex code: ef00\n"
 printf -- "      size in sectors: +250MB, hex code: 8300\n"
-printf -- "      size in sectors: +100MB, hex code: 8300\n"
+printf -- "      size in sectors: +???G (whatever your want), hex code: 8300\n"
 
 sleep 7s
 cgdisk "${ARCH_PARTITION_DEVICE}"
