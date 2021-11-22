@@ -18,7 +18,7 @@ an encrypted file system in UEFI mode.
 bash -c "$(curl -s https://raw.githubusercontent.com/mikilian/arch-luks-setup/main/arch_install.sh)" -- --intel --target=/dev/sda --swap-size 16
 ./arch_setup.sh --user foo --host arch-vm --keymap de-latin1 --vfio --intel
 exit
-mount -R /mnt && swapoff -a
+umount -R /mnt && swapoff -a
 reboot
 
 # login into account foo
