@@ -7,6 +7,15 @@ ARCH_VFIO=0
 ARCH_VFIO_KERNEL_PARAM=''
 ARCH_HELP=0
 
+function add_kernel_param() {
+  if test -z "${ARCH_VFIO_KERNEL_PARAM}";
+  then
+    ARCH_VFIO_KERNEL_PARAM="${1}"
+  else
+    ARCH_VFIO_KERNEL_PARAM="${ARCH_VFIO_KERNEL_PARAM} ${1}"
+  fi
+}
+
 declare -a ARCH_LOCALES=('en_US.UTF-8 UTF-8')
 
 while [[ $# -gt 0 ]];
@@ -70,12 +79,17 @@ do
       ARCH_VFIO=1
       shift;
       ;;
+    --vfio-bar3-fix)
+      add_kernel_param 'video=efifb:off'
+      add_kernel_param 'pci=realloc'
+      shift;
+      ;;
     --amd)
-      ARCH_VFIO_KERNEL_PARAM='amd_iommu=1'
+      add_kernel_param 'amd_iommu=1'
       shift;
       ;;
     --intel)
-      ARCH_VFIO_KERNEL_PARAM='intel_iommu=1'
+      add_kernel_param 'intel_iommu=1'
       shift;
       ;;
     *)
@@ -108,6 +122,8 @@ OPTIONS:
             Determines the default console layout, by default 'us'
     v, --vfio
             Loads the vfio kernel modules early, required for PCI passthrough
+    --vfio-bar3-fix
+            Adds video=efifb:off and pci=realloc to the kernel parameters
     a, --amd
             Adds amd_iommu=1 to the kernel parameters
     i, --intel
