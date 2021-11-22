@@ -261,5 +261,5 @@ do
 done
 
 printf -- "[+] The installation has been completed successfully.\n"
-printf -- "[+] Exit arch-chroot with 'exit' and unmount all partitions using 'umount -R && swapoff -a\n"
+printf -- "[+] Exit arch-chroot with 'exit' and unmount all partitions using 'umount -R /mnt && swapoff -a\n"
 printf -- "[+] Reboot your machine aftewards!\n"
