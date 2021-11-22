@@ -24,3 +24,9 @@ reboot
 # login into account foo
 ./post_install.sh --desktop xfce --nvidia --kvm
 ```
+
+## References
+
+- [Installation guide](https://wiki.archlinux.org/title/installation_guide)
+- [Encrypting an entires system](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system)
+- [PCI passthrough via OVMF](https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF)
