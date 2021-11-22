@@ -246,7 +246,7 @@ do
   read input
   case "${input}" in
     y|yes|Y|YES)
-      curl -O "/home/${ARCH_USER}/post_install.sh" https://raw.githubusercontent.com/mikilian/arch-luks-setup/main/post_install.sh
+      curl -o "/home/${ARCH_USER}/post_install.sh" https://raw.githubusercontent.com/mikilian/arch-luks-setup/main/post_install.sh
       chmod a+x "/home/${ARCH_USER}/post_install.sh"
 
       printf -- "[+] Saved the post_install.sh script in /home/%s\n" "${ARCH_USER}"

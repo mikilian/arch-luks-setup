@@ -214,7 +214,7 @@ do
   read input
   case "${input}" in
     y|yes|Y|YES)
-      curl -O /mnt/arch_setup.sh https://raw.githubusercontent.com/mikilian/arch-luks-setup/main/arch_setup.sh
+      curl -o /mnt/arch_setup.sh https://raw.githubusercontent.com/mikilian/arch-luks-setup/main/arch_setup.sh
       chmod a+x /mnt/arch_setup.sh
 
       printf "[+] Calling arch-chroot, please execute ./arch_setup.sh afterwards\n"
