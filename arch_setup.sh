@@ -224,6 +224,14 @@ sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=\/dev\/${ARCH
 if [ "${ARCH_VFIO}" -eq 1 ];
 then
   sed -i "s/loglevel=3 quiet/loglevel=3 quiet ${ARCH_VFIO_KERNEL_PARAM}/g" /etc/default/grub
+
+  declare -a GITHUB_BINARIES=('iommu_groups' 'vfio_check')
+
+  for i in "${GITHUB_BINARIES[@]}";
+  do
+    curl -o "/usr/local/bin/${i}" "https://raw.githubusercontent.com/mikilian/arch-luks-setup/main/bin/${i}"
+    chmod a+x "/usr/local/bin/${i}"
+  done
 fi
 
 grub-mkconfig -o /boot/grub/grub.cfg

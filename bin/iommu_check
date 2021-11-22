@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# see https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Enabling_IOMMU
+sudo dmesg | grep -i -e DMAR -e IOMMU
