@@ -134,6 +134,10 @@ do
       ARCH_USE_KDE_APPLICATIONS=1
       shift;
       ;;
+    --kde-applications-light)
+      ARCH_USE_KDE_APPLICATIONS=2
+      shift;
+      ;;
     --kvm)
       ARCH_KVM=1
       shift;
@@ -187,6 +191,8 @@ OPTIONS:
             Installs lightdm instead of sddm for xfce4
     --kde-applications
             Installs the whole kde application stack
+    --kde-applications-light
+            Installs a reduced kde application stack (no games, third party integrations ...)
     --kvm
             Installs qemu and libvirt
     --kvm-user
@@ -225,12 +231,21 @@ fi
 
 case "${ARCH_DESKTOP}" in
   kde|plasma|kde-plasma)
-    if [ "${ARCH_USE_KDE_APPLICATIONS}" -eq 1];
+    if [ "${ARCH_USE_KDE_APPLICATIONS}" -eq 1 ];
     then
       ARCH_KDE_PACKAGES+=('kde-applications')
+    elif [ "${ARCH_USE_KDE_APPLICATIONS}" -eq 2 ];
+    then
+      ARCH_KDE_PACKAGES+=('akonadi-calendar-tools' 'akonadi-import-wizard' 'akonadiconsole')
+      ARCH_KDE_PACKAGES+=('akregator' 'ark' 'dolphin' 'dolphin-plugins' 'ffmpegthumbs' 'filelight' 'kalarm' 'kcalc')
+      ARCH_KDE_PACKAGES+=('kcharselect' 'kcolorchooser' 'kcron' 'kde-dev-utils' 'kdenlive' 'kdepim-addons' 'kdf')
+      ARCH_KDE_PACKAGES+=('kdialog' 'kfind' 'kgpg' 'kleopatra' 'kmail' 'kmail-account-wizard' 'kmix' 'kompare' 'konsole')
+      ARCH_KDE_PACKAGES+=('kontact' 'konversation' 'kopete' 'korganizer' 'krdc' 'ksystemlog' 'ktouch' 'kwalletmanager')
+      ARCH_KDE_PACKAGES+=('kwrite' 'markdownpart' 'partitionmanager' 'svgpart' 'sweeper' 'umbrello')
     else
       ARCH_KDE_PACKAGES+=('ark' 'dolphin' 'konsole' 'yakuake')
     fi
+
 
     exec_pacman_list "${ARCH_KDE_PACKAGES[*]}"
     ;;
