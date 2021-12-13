@@ -85,11 +85,11 @@ do
       shift;
       ;;
     --amd)
-      add_kernel_param 'amd_iommu=1'
+      add_kernel_param 'amd_iommu=on'
       shift;
       ;;
     --intel)
-      add_kernel_param 'intel_iommu=1'
+      add_kernel_param 'intel_iommu=on'
       shift;
       ;;
     *)
@@ -125,9 +125,9 @@ OPTIONS:
     --vfio-bar3-fix
             Adds video=efifb:off and pci=realloc to the kernel parameters
     a, --amd
-            Adds amd_iommu=1 to the kernel parameters
+            Adds amd_iommu=on to the kernel parameters
     i, --intel
-            Adds intel_iommu=1 to the kernel parameters
+            Adds intel_iommu=on to the kernel parameters
 
 EOF
   exit 0
