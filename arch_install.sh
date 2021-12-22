@@ -6,6 +6,8 @@ ARCH_SWAP_SIZE='8G'
 ARCH_PARTITION_EFI=''
 ARCH_PARTITION_BOOT=''
 ARCH_PARTITION_ROOT=''
+ARCH_STOCK_KERNEL=1
+ARCH_ZEN_KERNEL=0
 
 function exec_pacstrap() {
   local array_of_packages="${1}"
@@ -21,7 +23,6 @@ declare -a ARCH_PACSTRAP_PACKAGES=(
   'gptfdisk'
   'grub-efi-x86_64'
   'lvm2'
-  'linux'
   'linux-firmware'
   'openssh'
   'vim'
@@ -70,6 +71,11 @@ do
       ;;
     -z|--zen)
       ARCH_PACSTRAP_PACKAGES+=('linux-zen' 'linux-zen-headers')
+      ARCH_ZEN_KERNEL=1
+      shift;
+      ;;
+    --no-stock-kernel)
+      ARCH_STOCK_KERNEL=0
       shift;
       ;;
     *)
@@ -102,10 +108,22 @@ OPTIONS:
     -r, --root-size
             Determines the size of the root partition, by default '100%FREE'
     -z, --zen
-            Installs additional packages to be able to use the Linux Zen kernel
+            Installs the Linux Zen kernel (pkg: linux-zen, linux-zen-headers)
+    --no-stock-kernel
+            Does not install the stock kernel (pkg: linux, linux-headers)
 
 EOF
   exit 0
+fi
+
+if [ "${ARCH_STOCK_KERNEL}" -eq 1 ];
+then
+  ARCH_PACSTRAP_PACKAGES+=('linux' 'linux-headers')
+elif [ "${ARCH_ZEN_KERNEL}" -eq 0 ];
+then
+  printf -- "[!] error, you're using --no-stock-kernel without --zen\n"
+
+  exit 1
 fi
 
 if [ "${ARCH_KNOWN_ARCHITECTURE}" -eq 0 ];
