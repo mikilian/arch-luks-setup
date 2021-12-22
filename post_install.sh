@@ -221,7 +221,7 @@ then
 
   if [ "${ARCH_DKMS}" -eq 1 ];
   then
-    ARCH_NVIDIA_PACKAGES+=('linux-headers' 'dkms' 'nvidia-dkms')
+    ARCH_NVIDIA_PACKAGES+=('dkms' 'nvidia-dkms')
   else
     ARCH_NVIDIA_PACKAGES+=('nvidia' 'nvidia-setting')
   fi
